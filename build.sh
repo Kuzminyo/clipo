@@ -1,5 +1,5 @@
 #!/bin/bash
-# Builds Clipo.app into ./build.
+# Builds Clipo.app into ./build.noindex.
 #   ./build.sh          build for this Mac
 #   ./build.sh install  also copy it to /Applications and launch
 #   ./build.sh dist     universal (Apple Silicon + Intel) build, zipped into ./dist for sharing
@@ -20,7 +20,8 @@ if [ ! -f Resources/AppIcon.icns ]; then
     iconutil -c icns "$ICONSET" -o Resources/AppIcon.icns
 fi
 
-APP=build/Clipo.app
+# ".noindex" keeps Spotlight from listing this copy next to the installed app.
+APP=build.noindex/Clipo.app
 rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
 cp "$BINARY" "$APP/Contents/MacOS/"
